@@ -1,0 +1,2301 @@
+/* =========================================
+   APP.CSS - FİNAL (FULL CYBERPUNK & CLEAN)
+   ========================================= */
+
+/* --- 1. DEĞİŞKENLER --- */
+:root {
+  --bg-body: #0a0f1e;
+  --bg-card: #111827;
+  --input-bg: rgba(31, 41, 55, 0.5);
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+
+  /* Neon Renkler */
+  --neon-blue: #3b82f6;
+  --neon-purple: #a855f7;
+  --neon-pink: #ec4899;
+
+  --border-color: #374151;
+  --header-gradient: linear-gradient(to right, #fff, #aabbcc);
+  --toggle-bg: #1f2937;
+  --toggle-icon: #fbbf24;
+}
+
+[data-theme="light"] {
+  --bg-body: #f0f2f5;
+  --bg-card: #ffffff;
+  --input-bg: #ffffff;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+
+  /* Light Mode Neon */
+  --neon-blue: #0284c7;
+  --neon-purple: #7c3aed;
+  --neon-pink: #db2777;
+
+  --border-color: #d1d5db;
+  --header-gradient: linear-gradient(to right, #1f2937, #4b5563);
+  --toggle-bg: #e5e7eb;
+  --toggle-icon: #1f2937;
+}
+
+/* --- 2. GENEL DÜZEN --- */
+html,
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  overflow-x: hidden;
+  /* yatay taşmaları kes */
+  overflow-y: auto;
+  /* sayfa kayabilsin */
+}
+
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* ⬇️ Scroll/boşluk problemini çözen kısım */
+  justify-content: flex-start;
+  padding: 2rem 1.25rem 5rem;
+
+  position: relative;
+  overflow-x: hidden;
+  /* efektler taşmasın */
+  overflow-y: visible;
+  /* sayfa yukarı-aşağı kayabilsin */
+}
+
+
+/* --- 3. IŞIK EFEKTLERİ --- */
+.corner-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(180px);
+  opacity: 0.15;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.glow-top-left {
+  top: -200px;
+  left: -200px;
+  background-color: var(--neon-pink);
+}
+
+.glow-top-right {
+  top: -200px;
+  right: -200px;
+  background-color: var(--neon-purple);
+}
+
+.bg-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(150px);
+  opacity: 0.10;
+  z-index: -1;
+}
+
+.bg-glow-blue {
+  top: 20%;
+  left: 20%;
+  background-color: var(--neon-blue);
+}
+
+.bg-glow-purple {
+  bottom: 20%;
+  right: 20%;
+  background-color: var(--neon-purple);
+}
+
+/* --- 4. HEADER --- */
+.app-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  z-index: 10;
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  font-weight: 800;
+  background: var(--header-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.app-header h2 {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  color: var(--neon-blue);
+  letter-spacing: 1px;
+  position: absolute;
+  top: 100%;
+}
+
+.theme-toggle-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--toggle-bg);
+  border: 1px solid var(--border-color);
+  color: var(--toggle-icon);
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle-btn:hover {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 15px var(--toggle-icon);
+}
+
+/* --- 5. GRID VE KARTLAR --- */
+.main-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  position: relative;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+}
+
+@media (min-width: 1024px) {
+  .grid-layout {
+    grid-template-columns: minmax(300px, 350px) 1fr minmax(300px, 350px) 1fr minmax(300px, 350px);
+    gap: 0;
+    align-items: stretch;
+  }
+}
+
+.neon-card {
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  z-index: 20;
+  position: relative;
+}
+
+.card-title {
+  text-align: center;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Kart Hover */
+.card-blue:hover {
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+}
+
+.card-purple:hover {
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.2);
+}
+
+.card-mixed:hover {
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 30px rgba(236, 72, 153, 0.2);
+}
+
+/* --- 6. NÖRON AĞLARI --- */
+.neural-connection-bridge {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+  overflow: visible;
+  margin: 0 -2px;
+}
+
+.desktop-only {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .desktop-only {
+    display: block;
+  }
+}
+
+.neural-svg-bridge {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.neural-line {
+  fill: none;
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+  transition: opacity 0.5s ease;
+}
+
+.neural-line.blue {
+  stroke: var(--neon-blue);
+}
+
+.neural-line.purple {
+  stroke: var(--neon-purple);
+}
+
+.dots-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.data-light {
+  position: absolute;
+  width: 12px;
+  height: 3px;
+  background: #fff;
+  border-radius: 4px;
+  offset-anchor: center;
+  offset-rotate: auto;
+  animation: moveAlongPath linear infinite;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.light-blue {
+  box-shadow: 0 0 6px 2px var(--neon-blue);
+}
+
+.light-purple {
+  box-shadow: 0 0 6px 2px var(--neon-purple);
+}
+
+@keyframes moveAlongPath {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+.connection-node {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  z-index: 50;
+  transform: translateY(-50%);
+  pointer-events: none;
+  border: 2px solid #fff;
+  background-color: var(--input-bg);
+  transition: all 0.3s ease;
+}
+
+.node-blue {
+  background-color: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue), 0 0 5px #fff;
+  border-color: var(--neon-blue);
+}
+
+.node-purple {
+  background-color: var(--neon-purple);
+  box-shadow: 0 0 10px var(--neon-purple), 0 0 5px #fff;
+  border-color: var(--neon-purple);
+}
+
+.node-pink {
+  background-color: var(--neon-pink);
+  box-shadow: 0 0 10px var(--neon-pink), 0 0 5px #fff;
+  border-color: var(--neon-pink);
+}
+
+.node-right-edge {
+  right: -6px;
+}
+
+.node-left-edge {
+  left: -6px;
+}
+
+/* --- 7. INPUT ANIMASYONLARI (FLOATING LABEL & LASER) --- */
+.input-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+/* Input Temel Stil */
+.input-group input {
+  width: 100%;
+  background-color: var(--input-bg);
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 4px 4px 0 0;
+  padding: 1.5rem 0.75rem 0.5rem 0.75rem;
+  font-size: 1rem;
+  color: var(--text-main);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+/* Label (Etiket) */
+.input-group label {
+  position: absolute;
+  top: 1rem;
+  left: 0.75rem;
+  font-size: 1rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* Focus veya Dolu İken Label Hareketi */
+.input-group input:focus~label,
+.input-group input:not(:placeholder-shown)~label {
+  top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--neon-blue);
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(59, 130, 246, 0.4);
+}
+
+/* Mor Kart Özel Renk */
+.card-purple .input-group input:focus~label,
+.card-purple .input-group input:not(:placeholder-shown)~label {
+  color: var(--neon-purple);
+  text-shadow: 0 0 5px rgba(168, 85, 247, 0.4);
+}
+
+/* Lazer Çizgi (Focus Border) */
+.focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--neon-blue);
+  transition: width 0.4s ease;
+  box-shadow: 0 0 10px var(--neon-blue);
+  z-index: 2;
+  transform: translateX(-50%);
+}
+
+.card-purple .focus-border {
+  background-color: var(--neon-purple);
+  box-shadow: 0 0 10px var(--neon-purple);
+}
+
+.input-group input:focus~.focus-border {
+  width: 100%;
+}
+
+/* Suffix (TL, %, Yıl) */
+.input-with-suffix .suffix {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--neon-blue);
+  pointer-events: none;
+}
+
+/* GECİKME & ORTALAMA % – suffix input dışına taşmasın */
+.input-with-suffix input {
+  padding-right: 3rem;
+}
+
+/* --- 8. DİĞER FORM ELEMANLARI --- */
+
+/* Toggle Switch (STANDART BOYUT) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--input-bg);
+  transition: .4s;
+  border-radius: 34px;
+  border: 1px solid var(--border-color);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 2px;
+  background-color: var(--text-muted);
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked+.slider {
+  background-color: var(--neon-purple);
+  border-color: var(--neon-purple);
+}
+
+input:checked+.slider:before {
+  transform: translateX(24px);
+  background-color: white;
+}
+
+/* Custom Cinsiyet Toggle */
+.custom-toggle-container {
+  display: flex;
+  background-color: var(--input-bg);
+  padding: 4px;
+  border-radius: 8px;
+  position: relative;
+  border: 1px solid var(--border-color);
+}
+
+.toggle-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 8px;
+  color: var(--text-muted);
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  width: calc(50% - 4px);
+  background-color: var(--neon-blue);
+  border-radius: 6px;
+  transition: 0.3s ease;
+  z-index: 1;
+}
+
+.slide-left {
+  left: 4px;
+}
+
+.slide-right {
+  left: 50%;
+}
+
+/* Slider Range */
+.slider-label-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.neon-slider {
+  width: 100%;
+  height: 8px;
+  background: var(--border-color);
+  border-radius: 5px;
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.neon-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--neon-blue);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--neon-blue);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.neon-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.slider-steps {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* --- 9. GAUGE (YUVARLAK GRAFİKLER) --- */
+.gauges-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.gauge-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gauge-item label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.circular-chart {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: conic-gradient(var(--chart-color) calc(var(--percentage) * 1%), var(--input-bg) 0);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: background 0.5s ease;
+}
+
+.circular-chart::before {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: var(--bg-card);
+  border-radius: 50%;
+}
+
+.inner-circle {
+  position: relative;
+  z-index: 2;
+  font-weight: bold;
+  color: var(--text-main);
+  font-size: 1rem;
+}
+
+.blue-chart {
+  --chart-color: var(--neon-blue);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+}
+
+.purple-chart {
+  --chart-color: var(--neon-purple);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+}
+
+/* --- 10. FOOTER BUTTON --- */
+.form-footer {
+  margin-top: 3rem;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+.neon-button {
+  background: linear-gradient(to right, var(--neon-blue), var(--neon-purple));
+  border: none;
+  padding: 1rem 4rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.neon-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+}
+
+.grid-2-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* --- YAŞ KONTROL BUTONU (INPUT İÇİNDEKİ) --- */
+.icon-action-btn {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--neon-blue);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+  z-index: 5;
+}
+
+.icon-action-btn:hover {
+  transform: scale(1.2);
+  color: #fff;
+  text-shadow: 0 0 8px var(--neon-blue);
+}
+
+/* --- MODAL (POP-UP) YAPISI --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  /* Arkadaki her şeyi bulanıklaştırır */
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: rgba(17, 24, 39, 0.9);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid var(--neon-blue);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+  text-align: center;
+  position: relative;
+  width: 320px;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-close-btn:hover {
+  color: #fff;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: var(--neon-blue);
+  letter-spacing: 2px;
+}
+
+/* --- DÖNEN ÇARK (KNOB) STİLİ --- */
+.knob-wrapper {
+  width: 200px;
+  height: 200px;
+  margin: 2rem auto;
+  position: relative;
+  border-radius: 50%;
+  /* Çarkın arka planındaki izler */
+  background:
+    radial-gradient(circle at center, var(--bg-card) 60%, transparent 61%),
+    conic-gradient(from 180deg, var(--neon-blue) 0%, rgba(59, 130, 246, 0.1) 100%);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  user-select: none;
+  /* Yazı seçilmesini engelle */
+}
+
+.knob-wrapper:active {
+  cursor: grabbing;
+}
+
+/* Dönen Daire */
+.knob-circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+  /* Tıklama wrapper'a gitsin */
+}
+
+/* Tutamaç (Handle) */
+.knob-handle {
+  position: absolute;
+  top: 10px;
+  /* Çemberin kenarına yakın */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fff, 0 0 20px var(--neon-blue);
+}
+
+/* Ortadaki Sayı */
+.knob-value {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 10px var(--neon-blue);
+  pointer-events: none;
+}
+
+.knob-value span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-shadow: none;
+  letter-spacing: 2px;
+}
+
+.modal-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.small-btn {
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- SAYI INPUTLARINDAKİ OKLARI (SPINNERS) GİZLEME --- */
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* --- KNOB (ÇARK) İÇİNDEKİ GİZLİ INPUT --- */
+.knob-input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 3rem;
+  font-weight: bold;
+  width: 100px;
+  text-align: center;
+  outline: none;
+  text-shadow: 0 0 10px var(--neon-blue);
+  font-family: inherit;
+  /* Fontu miras al */
+  padding: 0;
+  margin: 0;
+}
+
+/* Input focus olunca etrafı parlasın ama kutu çıkmasın */
+.knob-input:focus {
+  text-shadow: 0 0 20px var(--neon-purple);
+}
+
+/* --- YENİ EKLENEN STILLER (GÜZELLEŞTİRME & İKONLAR) --- */
+
+/* 1. İkonlu Input Düzeni */
+.input-with-icon .input-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 1.5rem;
+  /* Input text hizası */
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: color 0.3s;
+}
+
+/* İkon varsa, yazı ve label biraz sağa kaysın */
+.input-with-icon input {
+  padding-left: 2.5rem;
+  /* İkon boşluğu */
+}
+
+.input-with-icon label {
+  left: 2.5rem;
+}
+
+/* Input odaklanınca ikon da parlasın */
+.input-with-icon input:focus~.input-icon {
+  color: var(--neon-blue);
+  filter: drop-shadow(0 0 5px var(--neon-blue));
+}
+
+.card-purple .input-with-icon input:focus~.input-icon {
+  color: var(--neon-purple);
+  filter: drop-shadow(0 0 5px var(--neon-purple));
+}
+
+/* 2. Animasyonlu Eğitim Seviyesi (Stepper) */
+.education-stepper {
+  position: relative;
+  display: flex;
+  background-color: var(--input-bg);
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid var(--border-color);
+  margin-top: 0.5rem;
+  overflow: hidden;
+  /* Taşmayı engelle */
+}
+
+/* Kayan Arka Plan (Highlight) */
+.stepper-highlight {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(25% - 8px);
+  /* 4 tane olduğu için %25 */
+  /* EĞİTİM SEVİYESİ – kayan highlight TAM ORTA */
+  width: calc((100% - 8px) / 4);
+  background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+  border-radius: 6px;
+  transition: transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+  /* Yumuşak kayma */
+  z-index: 1;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+/* Butonlar (1, 2, 3, 4) */
+.step-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  z-index: 2;
+  /* Işığın üstünde dursun */
+  transition: color 0.3s;
+}
+
+.step-btn.active {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.text-steps {
+  margin-top: 5px;
+  padding: 0 10px;
+  font-size: 0.75rem;
+}
+
+/* 3. Cam Efektli Paneller (Checkbox vb. için) */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.glass-panel:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 4. GELİR İSTİKRARI – checkbox metnin arkasında kalmasın */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.checkbox-group>label {
+  position: static !important;
+  pointer-events: auto;
+}
+
+/* === GELİR İSTİKRARI – BİRAZ DAHA BÜYÜK TOGGLE === */
+
+.checkbox-group {
+  position: relative;
+  z-index: 999;
+}
+
+/* Switch gövdesi */
+.gelir-switch {
+  width: 56px;
+  /* ⬅ büyüdü (önce 46px idi) */
+  height: 30px;
+  /* ⬅ büyüdü */
+  pointer-events: none;
+  /* click container'dan */
+}
+
+/* Arka plan zaten slider'da */
+
+/* Yuvarlak top (knob) */
+.gelir-switch .slider:before {
+  width: 22px;
+  /* ⬅ büyüdü */
+  height: 22px;
+  left: 4px;
+  bottom: 4px;
+}
+
+/* Açıkken sağa kayma */
+.gelir-switch input:checked+.slider:before {
+  transform: translateX(26px);
+}
+
+/* =====================================================
+   MODERN FINTECH TOGGLE (CHECKBOX)
+   ===================================================== */
+
+.modern-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.modern-toggle:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Sol metin */
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+/* Switch gövdesi */
+.toggle-switch {
+  width: 54px;
+  height: 28px;
+  background: #1f2937;
+  border-radius: 999px;
+  position: relative;
+  transition: background 0.35s ease;
+}
+
+/* Knob */
+.toggle-knob {
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition:
+    transform 0.35s cubic-bezier(0.4, 1.4, 0.6, 1),
+    box-shadow 0.35s ease;
+}
+
+/* AKTİF */
+.modern-toggle.active .toggle-switch {
+  background: linear-gradient(90deg,
+      var(--neon-blue),
+      var(--neon-purple));
+}
+
+.modern-toggle.active .toggle-knob {
+  transform: translateX(26px);
+  box-shadow:
+    0 0 8px #fff,
+    0 0 16px var(--neon-purple);
+}
+
+/* =========================================
+   MODERN SELECT (Dropdown) STİLİ
+   ========================================= */
+
+/* Dropdown Kapsayıcısı */
+.modern-select-group {
+  position: relative;
+}
+
+/* Select Elementi Temel Ayarları */
+.modern-select {
+  width: 100%;
+  background-color: var(--input-bg);
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 4px 4px 0 0;
+  padding: 1.5rem 2.5rem 0.5rem 2.5rem;
+  /* İkon boşlukları */
+  font-size: 1rem;
+  color: var(--text-main);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  /* Tarayıcının varsayılan okunu gizle */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Focus Efekti */
+.modern-select:focus {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+/* Sağdaki Özel Ok İkonu */
+.select-arrow-icon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--neon-blue);
+  pointer-events: none;
+  /* Tıklamayı engelleme, select'e geçsin */
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+/* Dropdown açıldığında (focus olduğunda) oku döndür */
+.modern-select:focus~.select-arrow-icon {
+  transform: translateY(-50%) rotate(180deg);
+  color: var(--neon-purple);
+}
+
+/* Label (Etiket) Hareketi - Inputlarla aynı mantık */
+/* Select boş değilse (valid) veya focus ise yukarı kaydır */
+.modern-select:focus~label,
+.modern-select:valid~label {
+  top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--neon-blue);
+  font-weight: bold;
+  left: 2.5rem;
+  /* İkon hizası */
+  text-shadow: 0 0 5px rgba(59, 130, 246, 0.4);
+}
+
+/* Dropdown Seçenekleri (Option) - Dark Mode Uyumu */
+.modern-select option {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  padding: 10px;
+}
+
+/* Mor Kart İçin Özel Renk Ayarı */
+.card-purple .modern-select:focus~label,
+.card-purple .modern-select:valid~label {
+  color: var(--neon-purple);
+  text-shadow: 0 0 5px rgba(168, 85, 247, 0.4);
+}
+
+.card-purple .select-arrow-icon {
+  color: var(--neon-purple);
+}
+
+/* =========================================
+   ULTRA 3D HOLOGRAFİK ARAYÜZ
+   ========================================= */
+
+.result-section-ultra {
+  width: 100%;
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  perspective: 1500px;
+  /* Derinlik hissi */
+  padding-bottom: 4rem;
+}
+
+/* --- YÜKLENİYOR ANİMASYONU --- */
+.cyber-loader {
+  text-align: center;
+  position: relative;
+}
+
+.glitch-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--neon-blue);
+  position: relative;
+  animation: glitch 1s infinite;
+}
+
+.loader-bar {
+  width: 200px;
+  height: 4px;
+  background: #333;
+  margin: 10px auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.loader-bar::after {
+  content: '';
+  position: absolute;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: var(--neon-blue);
+  animation: loadBar 1s infinite ease-in-out;
+}
+
+@keyframes loadBar {
+  0% {
+    left: -50%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/* --- 3D TILT WRAPPER --- */
+.tilt-wrapper {
+  /* JavaScript ile bu değişkenler güncelleniyor: --rx, --ry */
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.1s ease-out;
+  /* Yumuşak takip */
+  transform-style: preserve-3d;
+}
+
+/* --- ULTRA KART TASARIMI --- */
+.ultra-card {
+  width: 450px;
+  min-height: 500px;
+  border-radius: 20px;
+  background: rgba(10, 15, 30, 0.85);
+  /* Yarı saydam koyu */
+  backdrop-filter: blur(20px);
+  /* Buzlu cam */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  transform-style: preserve-3d;
+}
+
+/* Arka Plan Izgarası */
+.card-grid-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* RİSK DURUMLARI (RENKLER) */
+.status-success {
+  border-top: 4px solid #10b981;
+  box-shadow: 0 0 50px rgba(16, 185, 129, 0.2);
+}
+
+.status-success .badge-status {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid #10b981;
+}
+
+.status-success .progress-ring {
+  stroke: #10b981;
+}
+
+.status-success .score-value {
+  color: #10b981;
+}
+
+.status-danger {
+  border-top: 4px solid #ef4444;
+  box-shadow: 0 0 50px rgba(239, 68, 68, 0.2);
+}
+
+.status-danger .badge-status {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+}
+
+.status-danger .progress-ring {
+  stroke: #ef4444;
+}
+
+.status-danger .score-value {
+  color: #ef4444;
+}
+
+/* KART İÇERİĞİ (Hepsini 3D Düzlemde Yükselt) */
+.ultra-header,
+.score-container,
+.analysis-details,
+.ultra-footer {
+  position: relative;
+  z-index: 2;
+  transform: translateZ(30px);
+  /* Karttan dışarı çıkıyormuş hissi */
+}
+
+/* BAŞLIK */
+.ultra-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.badge-status {
+  font-size: 1.2rem;
+  font-weight: 800;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 1px;
+}
+
+.system-id {
+  font-family: monospace;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* SKOR DAİRESİ */
+.score-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.score-circle {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.score-circle svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.bg-ring {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 6;
+}
+
+.progress-ring {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.5s ease-out;
+  filter: drop-shadow(0 0 5px currentColor);
+}
+
+.score-value {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.big-num {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 0 20px currentColor;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 5px;
+  letter-spacing: 2px;
+}
+
+/* DETAY LİSTELERİ */
+.analysis-details {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detail-group h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.detail-group ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.detail-group li {
+  margin-bottom: 0.3rem;
+}
+
+.positive h4 {
+  color: #10b981;
+}
+
+.negative h4 {
+  color: #ef4444;
+}
+
+.ultra-footer {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======================================================
+   3D KREDİ KARTI SONUÇ EKRANI & ANİMASYONLAR
+   ====================================================== */
+
+/* 1. SONUÇ SAHNESİ (KAPSAYICI) */
+.result-stage {
+  width: 100%;
+  max-width: 800px;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  perspective: 1200px;
+  /* 3D derinlik hissi için kritik */
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* 2. 3D KARTIN KENDİSİ */
+.credit-card-3d {
+  width: 440px;
+  height: 270px;
+  border-radius: 20px;
+  position: relative;
+  padding: 25px;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  /* Banka kartı fontu */
+  transform-style: preserve-3d;
+  /* İçindeki öğeler 3D hareket etsin */
+  transition: transform 0.1s ease-out;
+  /* Mouse hareketi için anlık tepki */
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+  background-size: cover;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* --- TEMA RENKLERİ (DARK & LIGHT MODE) --- */
+
+/* ONAY KARTI (Yeşil Tonlar) */
+.card-success {
+  /* Dark Mode Varsayılan */
+  background: linear-gradient(135deg, #022c22, #064e3b, #000000);
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.3);
+  border-color: #10b981;
+}
+
+[data-theme="light"] .card-success {
+  /* Light Mode */
+  background: linear-gradient(135deg, #ffffff, #d1fae5, #34d399);
+  color: #064e3b;
+  /* Yazı koyu olsun */
+  border-color: #fff;
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4);
+}
+
+/* RED KARTI (Kırmızı Tonlar) */
+.card-risk {
+  /* Dark Mode Varsayılan */
+  background: linear-gradient(135deg, #2a0a0a, #7f1d1d, #000000);
+  box-shadow: 0 0 40px rgba(239, 68, 68, 0.3);
+  border-color: #ef4444;
+}
+
+[data-theme="light"] .card-risk {
+  /* Light Mode */
+  background: linear-gradient(135deg, #fff1f2, #fda4af, #f43f5e);
+  color: #881337;
+  /* Yazı koyu olsun */
+  border-color: #fff;
+  box-shadow: 0 20px 40px rgba(244, 63, 94, 0.4);
+}
+
+/* 3. HOLOGRAFİK PARLAMA (SHINE EFFECT) */
+.card-shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(115deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.2) 40%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0.2) 60%,
+      transparent 70%);
+  z-index: 2;
+  pointer-events: none;
+  background-size: 250% 100%;
+  animation: hologramMove 5s infinite linear;
+  mix-blend-mode: overlay;
+}
+
+/* 4. KART İÇERİK KATMANI (Derinlik Efekti) */
+.card-content-layer {
+  position: relative;
+  z-index: 5;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Yazılar kart zemininden 40px yukarıda gibi dursun */
+  transform: translateZ(40px);
+}
+
+/* Kart Üst Kısım */
+.bank-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Çip Tasarımı */
+.chip-img {
+  width: 50px;
+  height: 35px;
+  background: linear-gradient(135deg, #fcd34d, #b45309);
+  border-radius: 6px;
+  margin-top: 15px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.chip-line {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Skor Sayacı */
+.score-display {
+  text-align: center;
+  margin-top: -10px;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.score-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  opacity: 0.8;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.score-number {
+  font-size: 4rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  font-family: 'Inter', sans-serif;
+  /* Rakamlar modern olsun */
+}
+
+/* Kart Alt Kısım */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.customer-info h5 {
+  margin: 0;
+  font-size: 0.6rem;
+  opacity: 0.7;
+  letter-spacing: 1px;
+}
+
+.customer-info p {
+  margin: 5px 0 0 0;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* 5. RAPOR KUTULARI (SONUÇ DETAYLARI) */
+.decision-report {
+  width: 100%;
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  opacity: 0;
+  animation: slideUp 0.8s ease 0.3s forwards;
+  /* Karttan sonra gelsin */
+}
+
+.report-box {
+  background: var(--bg-card);
+  /* Ana tema rengini kullanır */
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.report-box:hover {
+  transform: translateY(-5px);
+}
+
+.report-box h4 {
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.positive h4 {
+  color: #10b981;
+}
+
+.negative h4 {
+  color: #ef4444;
+}
+
+.reason-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reason-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+  font-size: 0.95rem;
+  color: var(--text-main);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.reason-list li:last-child {
+  border-bottom: none;
+}
+
+/* Liste mermileri yerine ikon efekti */
+.reason-list li::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+.positive .reason-list li::before {
+  background-color: #10b981;
+  box-shadow: 0 0 5px #10b981;
+}
+
+.negative .reason-list li::before {
+  background-color: #ef4444;
+  box-shadow: 0 0 5px #ef4444;
+}
+
+/* 6. YÜKLEME EKRANI (OVERLAY) */
+.cyber-loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 15, 30, 0.85);
+  /* Hafif transparan siyah */
+  backdrop-filter: blur(10px);
+  /* Arkayı bulanıklaştır */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loader-content {
+  text-align: center;
+  color: var(--neon-blue);
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+  border: 4px solid rgba(59, 130, 246, 0.3);
+  border-top-color: var(--neon-blue);
+  border-radius: 50%;
+  animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  box-shadow: 0 0 20px var(--neon-blue);
+}
+
+/* 7. ANİMASYON KEYFRAMES */
+@keyframes hologramMove {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 8. MOBİL UYUMLULUK */
+@media (max-width: 600px) {
+  .credit-card-3d {
+    width: 100%;
+    /* Mobilde tam genişlik */
+    max-width: 350px;
+    /* Çok taşmasın */
+    height: 220px;
+    padding: 20px;
+  }
+
+  .score-number {
+    font-size: 3rem;
+  }
+
+  .decision-report {
+    grid-template-columns: 1fr;
+    /* Raporlar alt alta */
+  }
+
+  .result-stage {
+    perspective: 800px;
+    /* Mobilde derinliği azalt */
+  }
+}
+
+
+
+/* =========================================================
+   FIX PACK (Scroll + Premium FX)
+   ========================================================= */
+
+/* Sonuç bölümü scrollIntoView sonrası üst boşluk */
+.result-anchor {
+  width: 100%;
+  scroll-margin-top: 24px;
+}
+
+/* Yukarı çık butonu */
+.scroll-top-btn {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9999;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(17, 24, 39, 0.55);
+  color: var(--text-main);
+  border-radius: 999px;
+  padding: 12px 14px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  transition: transform .18s ease, opacity .18s ease, background .25s ease, border-color .25s ease;
+}
+
+[data-theme="light"] .scroll-top-btn {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.scroll-top-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.scroll-top-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Onay/Red Flash + Glitch Overlay (pointer-events yok) */
+.decision-fx-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  animation: decisionFxIn 650ms ease-out forwards;
+}
+
+.decision-fx-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.35), transparent 60%);
+  opacity: .9;
+}
+
+.decision-fx-overlay::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background:
+    repeating-linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.09) 0px,
+      rgba(255, 255, 255, 0.09) 1px,
+      transparent 2px,
+      transparent 6px);
+  transform: rotate(0.001deg);
+  opacity: .45;
+  animation: scanLines 650ms linear forwards;
+}
+
+.decision-fx-overlay.approved {
+  background: radial-gradient(circle at 50% 40%, rgba(16, 185, 129, 0.55), transparent 55%);
+  filter: saturate(1.2);
+}
+
+.decision-fx-overlay.rejected {
+  background: radial-gradient(circle at 50% 40%, rgba(239, 68, 68, 0.55), transparent 55%);
+  filter: saturate(1.2);
+}
+
+@keyframes decisionFxIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  35% {
+    opacity: .9;
+    filter: blur(0px);
+  }
+
+  55% {
+    opacity: .25;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scanLines {
+  0% {
+    transform: translateY(-6%) scale(1);
+    opacity: .0;
+  }
+
+  15% {
+    opacity: .55;
+  }
+
+  60% {
+    opacity: .35;
+    transform: translateY(4%) scale(1.02);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(10%) scale(1.03);
+  }
+}
+
+/* MASTER CARD 150ms mikro-glitch */
+.brand-master {
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  opacity: .9;
+  text-transform: uppercase;
+}
+
+.brand-master.glitch-150 {
+  animation: masterGlitch 150ms steps(2, end) 1;
+  text-shadow:
+    2px 0 0 rgba(59, 130, 246, 0.7),
+    -2px 0 0 rgba(168, 85, 247, 0.7);
+}
+
+@keyframes masterGlitch {
+  0% {
+    transform: translate(0, 0) skewX(0deg);
+    filter: blur(0px);
+  }
+
+  20% {
+    transform: translate(-1px, 0) skewX(-6deg);
+  }
+
+  40% {
+    transform: translate(2px, 0) skewX(6deg);
+  }
+
+  60% {
+    transform: translate(-2px, 0) skewX(-10deg);
+    filter: blur(.2px);
+  }
+
+  80% {
+    transform: translate(1px, 0) skewX(8deg);
+  }
+
+  100% {
+    transform: translate(0, 0) skewX(0deg);
+    filter: blur(0px);
+  }
+}
+
+
+/* Sonuç kartı üst kapat butonu */
+.result-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 40;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--text-main);
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: transform .18s ease, background .25s ease, border-color .25s ease;
+}
+
+.result-close-btn:hover {
+  transform: scale(1.05);
+  background: rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+[data-theme="light"] .result-close-btn {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Kart üst sağ alan (MASTER CARD + NFC) */
+.bank-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Kart numarası + meta */
+.card-number {
+  margin-top: 18px;
+  font-size: 1.35rem;
+  letter-spacing: 2.5px;
+  transform: translateZ(18px);
+  text-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  opacity: .95;
+}
+
+.card-meta-row {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  transform: translateZ(14px);
+}
+
+.card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta-label {
+  font-size: .65rem;
+  letter-spacing: 2px;
+  opacity: .75;
+}
+
+.meta-value {
+  font-size: .95rem;
+  letter-spacing: 1px;
+  opacity: .92;
+}
+
+
+/* =========================================================
+   THEME + LAYOUT OVERRIDE (PASTE AT END OF App.css)
+   - Dark/Light modda arka plan + tüm yüzeyler net değişir
+   - Alttaki siyah boşluk + yukarı çıkamama (scroll kill) fix
+========================================================= */
+
+/* 1) DAHA PREMIUM THEME TOKENLARI (eski değişkenleri override eder) */
+:root {
+  /* Arkaplanı artık sadece düz renk değil, “premium gradient” yapıyoruz */
+  --bg-body: #060812;
+  --bg-body-2: #0b1226;
+
+  --card-bg: rgba(17, 24, 39, 0.72);
+  --card-border: rgba(255, 255, 255, 0.10);
+  --card-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+
+  --input-bg: rgba(255, 255, 255, 0.04);
+  --input-bg-focus: rgba(59, 130, 246, 0.08);
+
+  --text-main: rgba(245, 247, 255, 0.92);
+  --text-muted: rgba(245, 247, 255, 0.62);
+
+  --border-color: rgba(255, 255, 255, 0.12);
+
+  --neon-blue: #3b82f6;
+  --neon-purple: #a855f7;
+  --neon-pink: #ec4899;
+
+  --header-gradient: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(168, 85, 247, 0.95));
+  --toggle-bg: rgba(255, 255, 255, 0.06);
+  --toggle-icon: #fbbf24;
+
+  --glow-opacity: 0.18;
+  --glow-blur: 190px;
+
+  --overlay-noise-opacity: 0.05;
+  --page-transition: 220ms;
+}
+
+[data-theme="light"] {
+  /* LIGHT MODE = gerçek anlamda açık tema */
+  --bg-body: #f7f8fc;
+  --bg-body-2: #eef1ff;
+
+  --card-bg: rgba(255, 255, 255, 0.78);
+  --card-border: rgba(15, 23, 42, 0.10);
+  --card-shadow: 0 18px 60px rgba(15, 23, 42, 0.12);
+
+  --input-bg: rgba(15, 23, 42, 0.04);
+  --input-bg-focus: rgba(2, 132, 199, 0.10);
+
+  --text-main: rgba(15, 23, 42, 0.92);
+  --text-muted: rgba(15, 23, 42, 0.60);
+
+  --border-color: rgba(15, 23, 42, 0.12);
+
+  --neon-blue: #0284c7;
+  --neon-purple: #7c3aed;
+  --neon-pink: #db2777;
+
+  --header-gradient: linear-gradient(90deg, rgba(15, 23, 42, 0.95), rgba(2, 132, 199, 0.95));
+  --toggle-bg: rgba(15, 23, 42, 0.06);
+  --toggle-icon: rgba(15, 23, 42, 0.90);
+
+  --glow-opacity: 0.10;
+  --glow-blur: 170px;
+
+  --overlay-noise-opacity: 0.035;
+}
+
+/* 2) GLOBAL: scroll + arkaplan */
+html,
+body {
+  height: auto !important;
+  min-height: 100% !important;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden !important;
+}
+
+body {
+  /* App.css’te body flex/center var → scroll hissini ve layout’u bozuyor.
+     Override: normal akış + premium gradient */
+  display: block !important;
+
+  background:
+    radial-gradient(1200px 800px at 20% 15%, rgba(168, 85, 247, 0.22), transparent 60%),
+    radial-gradient(1000px 700px at 80% 25%, rgba(59, 130, 246, 0.18), transparent 62%),
+    linear-gradient(180deg, var(--bg-body), var(--bg-body-2));
+  color: var(--text-main);
+
+  transition:
+    background var(--page-transition) ease,
+    color var(--page-transition) ease;
+}
+
+/* Hafif noise/film overlay: premium hissi */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--overlay-noise-opacity);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+/* 3) APP LAYOUT FIX: alttaki boşluk + yukarı çıkamama */
+.app-container {
+  position: relative;
+  z-index: 1;
+  /* noise overlay üstüne çıksın */
+
+  min-height: 100dvh !important;
+  width: 100%;
+
+  /* içerik uzayınca sayfa uzasın */
+  justify-content: flex-start !important;
+
+  /* scroll’u öldüren kural buydu */
+  overflow: visible !important;
+
+  padding: clamp(16px, 2.4vw, 28px) !important;
+
+  transition:
+    background var(--page-transition) ease,
+    color var(--page-transition) ease;
+}
+
+/* 4) Glow’lar: tema değişince opaklık/blur da değişsin */
+.corner-glow,
+.bg-glow {
+  opacity: var(--glow-opacity) !important;
+  filter: blur(var(--glow-blur)) !important;
+  transition: opacity var(--page-transition) ease, filter var(--page-transition) ease;
+}
+
+/* 5) Kartlar/Inputs/Modal gibi “tüm yüzeyler” tema ile net değişsin */
+.neon-card {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+  box-shadow: var(--card-shadow) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition:
+    background-color var(--page-transition) ease,
+    border-color var(--page-transition) ease,
+    box-shadow var(--page-transition) ease,
+    color var(--page-transition) ease;
+}
+
+.input-group input,
+.modern-select {
+  background-color: var(--input-bg) !important;
+  color: var(--text-main) !important;
+  border-bottom-color: var(--border-color) !important;
+  transition:
+    background-color var(--page-transition) ease,
+    border-color var(--page-transition) ease,
+    color var(--page-transition) ease;
+}
+
+.input-group input:focus,
+.modern-select:focus {
+  background-color: var(--input-bg-focus) !important;
+}
+
+/* Select option light/dark uyumu zaten vardı ama güçlendiriyoruz */
+.modern-select option {
+  background-color: rgba(0, 0, 0, 0.88);
+  color: #fff;
+}
+
+[data-theme="light"] .modern-select option {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+/* Modal overlay de tema ile değişsin */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.55) !important;
+}
+
+[data-theme="light"] .modal-overlay {
+  background: rgba(15, 23, 42, 0.30) !important;
+}
+
+/* 6) Result section alt boşluk şişirmesin */
+.result-section-ultra {
+  padding-bottom: 0 !important;
+  margin-bottom: 24px !important;
+}

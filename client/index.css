@@ -1,0 +1,90 @@
+/* =========================
+   index.css (FIX PACK)
+   - Alt siyah boşluk gider
+   - Analiz sonrası scroll kilidi gider
+========================= */
+
+:root {
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* ✅ SCROLL KİLİDİNİ KIR */
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+
+  /* ✅ Alttaki boşlukta da aynı arkaplan dursun */
+  background: #05070f;
+}
+
+/* Root kesin uzayabilsin */
+#root {
+  min-height: 100vh;
+}
+
+/* ✅ App.css'teki scroll öldüren kuralları override et */
+.app-container {
+  /* App.css'te justify-content:center + overflow:hidden var → scroll sorun yapar */
+  justify-content: flex-start !important;
+  overflow: visible !important;
+
+  /* içerik uzadıkça rahat uzasın */
+  min-height: 100vh !important;
+
+  /* Altta ekstra siyah blok hissini bitir */
+  padding-bottom: 0 !important;
+}
+
+/* ✅ Sonuç alanı altta boşluk basmasın (App.css padding-bottom:4rem) */
+.result-section-ultra {
+  padding-bottom: 0 !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Bazı tarayıcılarda 100vh bug'ı → daha stabil */
+@supports (height: 100dvh) {
+  #root {
+    min-height: 100dvh;
+  }
+
+  .app-container {
+    min-height: 100dvh !important;
+  }
+}
+
+/* Scrollbar (opsiyonel, premium) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.35);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.55);
+}
